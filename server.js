@@ -1,11 +1,10 @@
 const express = require('express');
 const routes = require('./routes');
-
 const app = express();
+
 const port = 8080;
 
-app.use(routes);
+app.use('/', require('./routes'));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+app.listen(process.env.port || port);
+console.log('Web Server is listening at port' + (process.env.port || port));

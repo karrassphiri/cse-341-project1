@@ -1,13 +1,18 @@
 
-const path = require('path');
+const florenceRoute = (req, res) => {
+  res.send('Florence Phiri');
+};
+
+const jothamRoute = (req, res) => {
+  res.send ('Jotham Phiri');
+};
+
+const jathnielRoute = (req, res) => {
+  res.send ('Jathniel Phiri');
+};
 
 module.exports = {
-  getRoot: (req, res) => {
-    const indexPath = path.join(__dirname, '..', 'public', 'index.html');
-    res.sendFile(indexPath);
-  },
-
-  getFlorence: (req, res) => {
-    res.send('Florence Phiri');
-  },
+  florenceRoute,
+  jathnielRoute,
+  jothamRoute,
 };
