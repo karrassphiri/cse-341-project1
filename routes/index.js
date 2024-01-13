@@ -1,8 +1,12 @@
-const routes = require('express').Router();
+const express = require('express'); //added for frontend
 
+const routes = require('express').Router();
+const path = require('path'); //added for frontend
 const lesson1Controller = require('../controllers/lesson1');
 
+
 routes.get('/', lesson1Controller.florenceRoute);
+routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend'))); //added for frontend
 routes.get('/jotham', lesson1Controller.jothamRoute);
 routes.get('/jathniel', lesson1Controller.jathnielRoute);
 
