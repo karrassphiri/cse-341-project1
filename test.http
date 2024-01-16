@@ -2,17 +2,22 @@
 GET / HTTP/1.1
 Host: localhost:8080
 
-# GET request for a specific file in the 'frontend' directory
+###
+
+# GET request for frontend
 GET /frontend HTTP/1.1
 Host: localhost:8080
 
-# GET request for /jotham
+###
+
+# GET request for jotham
 GET /jotham HTTP/1.1
 Host: localhost:8080
 
+###
 
-# GET request for /jathniel
+# GET request for jathniel
 GET /jathniel HTTP/1.1
 Host: localhost:8080
 
-
+###
