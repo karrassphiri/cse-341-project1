@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require('dotenv');  // The first two lines are accessing the .env file
 dotenv.config();
 
 const MongoClient = require('mongodb').MongoClient;
@@ -10,9 +10,9 @@ const initDb = (callback) => {
         console.log('Db is already initiated');
         return callback(null, database);
     }
-    MongoClient.connect(process.env.MONGODB_URL) // Fixed the typo in the URL
+    MongoClient.connect(process.env.MONGODB_URI) 
         .then((client) => {
-            database = client.db(); // Use client.db() to get the database instance
+            database = client; 
             callback(null, database);
         })
         .catch((err) => {
@@ -20,7 +20,7 @@ const initDb = (callback) => {
         });
 };
 
-const getDatabase = () => {
+const getDb = () => {
     if (!database) {
         throw Error('Database not initiated');
     }
@@ -29,5 +29,5 @@ const getDatabase = () => {
 
 module.exports = {
     initDb,
-    getDatabase
+    getDb
 };
