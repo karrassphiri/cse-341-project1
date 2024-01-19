@@ -1,0 +1,30 @@
+//LOCALHOST
+### Get all users
+Get http://localhost:8080/users
+
+### Get contact bby id
+GET http://localhost:8080/users/65a63599947aff5a69b912dd
+
+### Create contact
+POST http://localhost:8080/users HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Ellen",
+    "lastName":"Chirwa",
+    "email":"ells@gmail.com",
+    "favoriteColor":"red",
+    "birthday":"14/09/1992"
+}
+
+### PUT Contact
+PUT http://localhost:8080/users/65a63599947aff5a69b912dd HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Florence",
+    "lastName": "Phiri",
+    "email": "floflo@gmail.com",
+    "favoriteColor": "Apple green",
+    "birthday": "06/02/1986"
+}

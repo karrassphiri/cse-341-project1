@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
         favoriteColor: req.body.favoriteColor,
         birthday: req.body.birthday
     };
-    const response = await mongodb.getDb().db.collection('users').InsertOne(user);
+    const response = await mongodb.getDb().db.collection('users').insertOne(user);
     if (response.acknowledge) {
        res.status(204).send();
     } else {
@@ -56,8 +56,9 @@ const updateUser = async (req, res) => {
 //This is the delete user function
 const deleteUser = async (req, res) => {
     const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db.collection('users').remove({ _id: userId}, user);
-    if (response.deleteCount > 0) {
+    //const response = await mongodb.getDb().db.collection('users').remove({ _id: userId}, user);
+    const response = await mongodb.getDb().db.collection('users').deleteOne({ _id: userId });
+    if (response.deletedCount > 0) {
        res.status(204).send();
     } else {
         res.status(500).json(response.error || 'Some error occured while deleting the user.' );
