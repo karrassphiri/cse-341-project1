@@ -8,7 +8,8 @@
   "host": "cse341lesson1-zj1w.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http",
+    "http"
   ],
   "paths": {
     "/": {
