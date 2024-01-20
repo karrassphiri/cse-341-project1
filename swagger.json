@@ -94,7 +94,7 @@
         }
       }
     },
-    "./users/{id}": {
+    "/users/{id}": {
       "get": {
         "description": "",
         "produces": [
