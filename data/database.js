@@ -1,4 +1,6 @@
-const dotenv = require('dotenv');  // The first two lines are accessing the .env file
+// database.js
+
+const dotenv = require('dotenv');
 dotenv.config();
 
 const MongoClient = require('mongodb').MongoClient;
@@ -10,9 +12,9 @@ const initDb = (callback) => {
         console.log('Db is already initiated');
         return callback(null, database);
     }
-    MongoClient.connect(process.env.MONGODB_URI) 
+    MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((client) => {
-            database = client; 
+            database = client.db(); // Corrected to use `db` function
             callback(null, database);
         })
         .catch((err) => {
