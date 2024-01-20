@@ -28,3 +28,6 @@ content-type: application/json
     "favoriteColor": "Apple green",
     "birthday": "06/02/1986"
 }
+
+### DELETE Contact
+DELETE http://localhost:8080/users/65ab317d09143f344ad14970
