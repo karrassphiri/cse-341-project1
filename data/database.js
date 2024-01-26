@@ -12,15 +12,26 @@ const initDb = (callback) => {
         console.log('Db is already initiated');
         return callback(null, database);
     }
-    MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+    const connectionString = process.env.MONGODB_URI;
+    if (!connectionString) {
+        return callback('MONGODB_URI is not set in environment variables');
+    }
+
+    console.log('Connecting to MongoDB:', connectionString);
+
+    MongoClient.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((client) => {
-            database = client.db(); // Corrected to use `db` function
+            database = client.db();
+            console.log('Connected to MongoDB');
             callback(null, database);
         })
         .catch((err) => {
+            console.error('Error connecting to MongoDB:', err);
             callback(err);
         });
 };
+
 
 const getDb = () => {
     if (!database) {
