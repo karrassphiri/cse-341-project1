@@ -21,9 +21,12 @@ app.use('/', require('./routes'));
 const usersRouter = require('./routes/users'); // added for Mongodb
 
 const studentRouter = require('./routes/student'); // added for the "student" collection
+const teacherRouter = require('./routes/teacher'); // added for the "teacher" collection
 
 app.use('/users', usersRouter); // added for Mongodb
 app.use('/student', studentRouter); // added for the "student" collection
+app.use('/teacher', teacherRouter); // added for the "teacher" collection
+
 
 mongodb.initDb((err) => {
     if (err) {
