@@ -14,6 +14,9 @@ const getAll = async (req, res) => {
 
 const getSingle = (req, res) => {
     //#swagger.tags=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid student id to find student');
+    }
     const studentId = new ObjectId(req.params.id);
     mongodb
       .getDb()
@@ -56,6 +59,9 @@ const createStudent = async (req, res) => {
 //This is the update user function
 const updateStudent = async (req, res) => {
     //#swagger.tagss=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid student id to update student');
+    }
     const studentId = new ObjectId(req.params.id);
     const updatedStudent = {
         $set: {
@@ -86,6 +92,9 @@ const updateStudent = async (req, res) => {
 //This is the delete student function
 const deleteStudent = async (req, res) => {
     //#swagger.tags=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid student id to delete student');
+    }
     const studentId = new ObjectId(req.params.id);
     try {
         const response = await mongodb.getDb().collection('students').deleteOne({ _id: studentId });
