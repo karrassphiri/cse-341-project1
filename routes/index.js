@@ -1,20 +1,20 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
-const lesson1Controller = require('../controllers/lesson1');
-router.use('/', require('./swagger'));
+const express = require('express'); //added for frontend
 
-router.get('/', (req, res) => {
+const routes = require('express').Router();
+routes.use('/', require('./swagger'));
+
+const path = require('path'); //added for frontend
+const lesson1Controller = require('../controllers/lesson1');
+
+//routes.get('/', lesson1Controller.florenceRoute);
+routes.get('/', (req, res) => {
     //#Swagger.tags=['Hello World']
     res.send('Hello World');
-});
+})
+routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend'))); //added for frontend
+routes.get('/jotham', lesson1Controller.jothamRoute);
+routes.get('/jathniel', lesson1Controller.jathnielRoute);
+routes.use('/users', require('./users'));
 
-router.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
 
-const studentsRoutes = require('./students');
-const teachersRoutes = require('./teachers');
-
-router.use('/students', studentsRoutes);
-router.use('/teachers', teachersRoutes);
-
-module.exports = router;
+module.exports = routes;

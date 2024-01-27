@@ -5,7 +5,7 @@ const app = express();
 
 const port = process.env.PORT || 8080;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json());   // This will make create user function to work
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -16,11 +16,17 @@ app.use((req, res, next) => {
     next();
 });
 
-const studentsRouter = require('./routes/students');
-const teachersRouter = require('./routes/teachers');
+app.use('/', require('./routes'));
 
-app.use('/students', studentsRouter);
-app.use('/teachers', teachersRouter);
+const usersRouter = require('./routes/users'); // added for Mongodb
+
+const studentRouter = require('./routes/students'); // added for the "student" collection
+const teacherRouter = require('./routes/teachers'); // added for the "teacher" collection
+
+app.use('/users', usersRouter); // added for Mongodb
+app.use('/students', studentRouter); // added for the "student" collection
+app.use('/teachers', teacherRouter); // added for the "teacher" collection
+
 
 mongodb.initDb((err) => {
     if (err) {

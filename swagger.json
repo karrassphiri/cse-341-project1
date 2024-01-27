@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Users Api",
-    "description": "Users Api",
+    "title": "Users, Students, and Teachers API",
+    "description": "API for managing users, students, and teachers",
     "version": "1.0.0"
   },
   "host": "project2-act3.onrender.com",
@@ -11,7 +11,27 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Default route",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/jotham": {
+      "get": {
+        "description": "Endpoint for Jotham",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/jathniel": {
+      "get": {
+        "description": "Endpoint for Jathniel",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,7 +41,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "API documentation endpoint",
         "responses": {
           "default": {
             "description": ""
@@ -29,9 +49,9 @@
         }
       }
     },
-    "/students/": {
+    "/users/": {
       "get": {
-        "description": "",
+        "description": "Get all users",
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -43,7 +63,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new user",
         "parameters": [
           {
             "name": "body",
@@ -57,19 +77,13 @@
                 "lastName": {
                   "example": "any"
                 },
-                "DoB": {
-                  "example": "any"
-                },
-                "grade": {
-                  "example": "any"
-                },
-                "address": {
-                  "example": "any"
-                },
-                "contactNumber": {
-                  "example": "any"
-                },
                 "email": {
+                  "example": "any"
+                },
+                "favoriteColor": {
+                  "example": "any"
+                },
+                "birthday": {
                   "example": "any"
                 }
               }
@@ -79,6 +93,99 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Get a user by ID",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "favoriteColor": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
