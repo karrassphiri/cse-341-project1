@@ -14,22 +14,22 @@ const getAll = async (req, res) => {
     }
 };
 
-const getSingle = async (req, res) => {
+const getSingle = (req, res) => {
     //#swagger.tags=['Users']
     const userId = new ObjectId(req.params.id);
-    try {
-        const result = await mongodb.getDb().collection('users').findOne({ _id: userId });
-
-        if (result) {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(result);
-        } else {
-            res.status(404).json({ message: 'User not found' });
+    mongodb
+      .getDb()
+      .db()
+      .collection('users')
+      .find({ _id: userId })
+      .toArray((err, result) => {
+        if (err) {
+          res.status(400).json({ message: err });
         }
-    } catch (error) {
-        res.status(500).json('Error getting user: ' + error.message);
-    }
-};
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(result[0]);
+      });
+  };
 
 //This is the create user function
 const createUser = async (req, res) => {
@@ -86,6 +86,7 @@ const updateUser = async (req, res) => {
 //This is the delete user function
 const deleteUser = async (req, res) => {
     //#swagger.tags=['Users']
+
     const userId = new ObjectId(req.params.id);
     try {
         const response = await mongodb.getDb().collection('users').deleteOne({ _id: userId });

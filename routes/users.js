@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const usersController = require('../controllers/users');
+const validation = require('../middleware/validate');
 
 //The get functions will be looked in the UsersContollers
 //All these 5 routes will redirect to usersController which will go to controllers folder and will look for users.js
