@@ -5,29 +5,3 @@ Get http://localhost:8080/students
 ### Get contact by id
 GET http://localhost:8080/students/65b5327411e3fe7607b87981 
 
-### Create contact
-POST http://localhost:8080/users HTTP/1.1
-content-type: application/json
-
-{
-    "firstName": "Florence",
-    "lastName": "Phiri",
-    "email": "floflo@gmail.com",
-    "favoriteColor": "Apple green",
-    "birthday": "06/02/1986"
-}
-
-### PUT Contact
-PUT http://localhost:8080/users/65a63599947aff5a69b912dd HTTP/1.1
-content-type: application/json
-
-{
-    "firstName": "Florence",
-    "lastName": "Phiri",
-    "email": "floflo@gmail.com",
-    "favoriteColor": "Apple green",
-    "birthday": "06/02/1986"
-}
-
-### DELETE Contact
-DELETE http://localhost:8080/users/65b4672e9849697cbe15af85
