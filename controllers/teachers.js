@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId; // this is the primary key that Mo
 
 const getAll = async (req, res) => {
     try {
-        const result = await mongodb.getDb().collection('student').find().toArray();
+        const result = await mongodb.getDb().collection('teachers').find().toArray();
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result);
     } catch (error) {
@@ -14,12 +14,12 @@ const getAll = async (req, res) => {
 
 const getSingle = (req, res) => {
     //#swagger.tags=['Users']
-    const studentId = new ObjectId(req.params.id);
+    const teacherId = new ObjectId(req.params.id);
     mongodb
       .getDb()
       .db()
-      .collection('student')
-      .find({ _id: studentId })
+      .collection('teachers')
+      .find({ _id: teacherId })
       .toArray((err, result) => {
         if (err) {
           res.status(400).json({ message: err });
@@ -29,81 +29,75 @@ const getSingle = (req, res) => {
       });
   };
 
-const createStudent = async (req, res) => {
-    const student = {
+const createTeacher = async (req, res) => {
+    const teacher = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        DoB: req.body.DoB,
-        grade: req.body.grade,  
-        address: req.body.address,
         contactNumber: req.body.contactNumber,
-        email: req.body.email  
+        gender: req.body.gender  
     };
 
     try {
-        const response = await mongodb.getDb().collection('student').insertOne(student);
+        const response = await mongodb.getDb().collection('teachers').insertOne(teacher);
         if (response.acknowledged) {
             res.status(204).send();
         } else {
-            res.status(500).json(response.error || 'Some error occurred while creating the student.');
+            res.status(500).json(response.error || 'Some error occurred while creating the teacher.');
         }
     } catch (error) {
-        res.status(500).json('Error creating student: ' + error.message);
+        res.status(500).json('Error creating teacher: ' + error.message);
     }
 };
 
-//This is the update user function
-const updateStudent = async (req, res) => {
+//This is the update teacher function
+const updateTeacher = async (req, res) => {
     //#swagger.tagss=['Users']
-    const studentId = new ObjectId(req.params.id);
-    const updatedStudent = {
+    const teacherId = new ObjectId(req.params.id);
+    const updatedTeacher = {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            DoB: req.body.DoB,
-            grade: req.body.grade,  
-            address: req.body.address,
             contactNumber: req.body.contactNumber,
-            email: req.body.email  
+            gender: req.body.gender  
          }
     };
 
     try {
-        const response = await mongodb.getDb().collection('student').updateOne({ _id: studentId }, updatedStudent);
+        const response = await mongodb.getDb().collection('teachers').updateOne({ _id: teacherId }, updatedTeacher);
 
         if (response.modifiedCount > 0) {
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'student not found' });
+            res.status(404).json({ message: 'teacher not found' });
         }
     } catch (error) {
-        res.status(500).json('Error updating student: ' + error.message);
+        res.status(500).json('Error updating teacher: ' + error.message);
     }
 };
 
 
 //This is the delete student function
-const deleteStudent = async (req, res) => {
+const deleteTeacher = async (req, res) => {
     //#swagger.tags=['Users']
 
-    const studentId = new ObjectId(req.params.id);
+    const teacherId = new ObjectId(req.params.id);
     try {
-        const response = await mongodb.getDb().collection('student').deleteOne({ _id: studentId });
+        const response = await mongodb.getDb().collection('teachers').deleteOne({ _id: teacherId });
 
         if (response.deletedCount > 0) {
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'student not found' });
+            res.status(404).json({ message: 'teacher not found' });
         }
     } catch (error) {
-        res.status(500).json('Error deleting student: ' + error.message);
+        res.status(500).json('Error deleting teacher: ' + error.message);
     }
 };
 
 module.exports = {
     getAll,
     getSingle,
-    createStudent,
-    updateStudent,
-    deleteStudent,
+    createTeacher,
+    updateTeacher,
+    deleteTeacher,
 };

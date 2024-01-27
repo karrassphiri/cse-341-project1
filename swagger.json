@@ -49,7 +49,7 @@
         }
       }
     },
-    "/student/": {
+    "/students/": {
       "get": {
         "description": "Get all students",
         "produces": ["application/json"],
@@ -109,7 +109,7 @@
         }
       }
     },
-    "/student/{id}": {
+    "/students/{id}": {
       "get": {
         "description": "Get a student by ID",
         "produces": ["application/json"],
@@ -208,7 +208,7 @@
         }
       }
     },
-    "/teacher/": {
+    "/teachers/": {
       "get": {
         "description": "Get all teachers",
         "produces": ["application/json"],
@@ -256,7 +256,7 @@
         }
       }
     },
-    "/teacher/{id}": {
+    "/teachers/{id}": {
       "get": {
         "description": "Get a teacher by ID",
         "produces": ["application/json"],

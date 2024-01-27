@@ -16,12 +16,12 @@ app.use((req, res, next) => {
     next();
 });
 
-const studentRouter = require('./routes/student');
-const teacherRouter = require('./routes/teacher');
+const studentsRouter = require('./routes/students');
+const teachersRouter = require('./routes/teachers');
 
 app.use('/', require('./routes'));
-app.use('/student', studentRouter);
-app.use('/teacher', teacherRouter);
+app.use('/students', studentsRouter);
+app.use('/teachers', teachersRouter);
 
 mongodb.initDb((err) => {
     if (err) {
