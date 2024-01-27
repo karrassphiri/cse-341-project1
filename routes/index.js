@@ -11,9 +11,6 @@ router.get('/', (req, res) => {
 
 router.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
 
-router.get('/jotham', lesson1Controller.jothamRoute);
-router.get('/jathniel', lesson1Controller.jathnielRoute);
-
 const studentsRoutes = require('./students');
 const teachersRoutes = require('./teachers');
 

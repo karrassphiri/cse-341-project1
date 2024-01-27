@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 const studentsRouter = require('./routes/students');
 const teachersRouter = require('./routes/teachers');
 
-app.use('/', require('./routes'));
 app.use('/students', studentsRouter);
 app.use('/teachers', teachersRouter);
 
