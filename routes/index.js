@@ -1,24 +1,23 @@
 const express = require('express');
-const routes = require('express').Router();
+const router = express.Router();
 const path = require('path');
 const lesson1Controller = require('../controllers/lesson1');
+router.use('/', require('./swagger'));
 
-routes.get('/', (req, res) => {
+router.get('/', (req, res) => {
     //#Swagger.tags=['Hello World']
     res.send('Hello World');
 });
 
-routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
+router.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
 
-routes.get('/jotham', lesson1Controller.jothamRoute);
-routes.get('/jathniel', lesson1Controller.jathnielRoute);
+router.get('/jotham', lesson1Controller.jothamRoute);
+router.get('/jathniel', lesson1Controller.jathnielRoute);
 
-// Include routes for 'users', 'students', and 'teachers'
 const studentsRoutes = require('./students');
 const teachersRoutes = require('./teachers');
 
-// Use the respective paths for each collection
-routes.use('/students', studentsRoutes);
-routes.use('/teachers', teachersRoutes);
+router.use('/students', studentsRoutes);
+router.use('/teachers', teachersRoutes);
 
-module.exports = routes;
+module.exports = router;

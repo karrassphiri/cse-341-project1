@@ -1,17 +1,19 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Users, Students, and Teachers API",
-    "description": "API for managing users, students, and teachers",
+    "title": "Users Api",
+    "description": "Users Api",
     "version": "1.0.0"
   },
   "host": "project2-act3.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/": {
       "get": {
-        "description": "Default route",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,7 +23,7 @@
     },
     "/jotham": {
       "get": {
-        "description": "Endpoint for Jotham",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -31,7 +33,7 @@
     },
     "/jathniel": {
       "get": {
-        "description": "Endpoint for Jathniel",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -41,7 +43,7 @@
     },
     "/api-docs": {
       "get": {
-        "description": "API documentation endpoint",
+        "description": "",
         "responses": {
           "default": {
             "description": ""
@@ -51,8 +53,10 @@
     },
     "/students/": {
       "get": {
-        "description": "Get all students",
-        "produces": ["application/json"],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -63,7 +67,7 @@
         }
       },
       "post": {
-        "description": "Create a new student",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -100,9 +104,6 @@
           "204": {
             "description": "No Content"
           },
-          "404": {
-            "description": "Not Found"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -111,8 +112,13 @@
     },
     "/students/{id}": {
       "get": {
-        "description": "Get a student by ID",
-        "produces": ["application/json"],
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -125,16 +131,14 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "put": {
-        "description": "Update a student by ID",
+        "tags": [],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -186,7 +190,10 @@
         }
       },
       "delete": {
-        "description": "Delete a student by ID",
+        "tags": [
+          "Users"
+        ],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -210,8 +217,10 @@
     },
     "/teachers/": {
       "get": {
-        "description": "Get all teachers",
-        "produces": ["application/json"],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -222,7 +231,7 @@
         }
       },
       "post": {
-        "description": "Create a new teacher",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -258,8 +267,13 @@
     },
     "/teachers/{id}": {
       "get": {
-        "description": "Get a teacher by ID",
-        "produces": ["application/json"],
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -272,16 +286,14 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "put": {
-        "description": "Update a teacher by ID",
+        "tags": [],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -324,7 +336,10 @@
         }
       },
       "delete": {
-        "description": "Delete a teacher by ID",
+        "tags": [
+          "Users"
+        ],
+        "description": "",
         "parameters": [
           {
             "name": "id",

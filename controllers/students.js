@@ -30,6 +30,7 @@ const getSingle = (req, res) => {
   };
 
 const createStudent = async (req, res) => {
+        //#swagger.tags=['Users']
     const student = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -85,7 +86,6 @@ const updateStudent = async (req, res) => {
 //This is the delete student function
 const deleteStudent = async (req, res) => {
     //#swagger.tags=['Users']
-
     const studentId = new ObjectId(req.params.id);
     try {
         const response = await mongodb.getDb().collection('students').deleteOne({ _id: studentId });
