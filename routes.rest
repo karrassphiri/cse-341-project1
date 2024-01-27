@@ -10,11 +10,11 @@ POST http://localhost:8080/users HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Ellen",
-    "lastName":"Chirwa",
-    "email":"ells@gmail.com",
-    "favoriteColor":"red",
-    "birthday":"14/09/1992"
+    "firstName": "Florence",
+    "lastName": "Phiri",
+    "email": "floflo@gmail.com",
+    "favoriteColor": "Apple green",
+    "birthday": "06/02/1986"
 }
 
 ### PUT Contact
@@ -30,4 +30,4 @@ content-type: application/json
 }
 
 ### DELETE Contact
-DELETE http://localhost:8080/users/65ab317d09143f344ad14970
+DELETE http://localhost:8080/users/65b4672e9849697cbe15af85
