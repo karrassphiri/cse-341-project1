@@ -5,7 +5,7 @@
     "description": "API for managing users, students, and teachers",
     "version": "1.0.0"
   },
-  "host": "cse341lesson1-zj1w.onrender.com",
+  "host": "project2-act3.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "paths": {

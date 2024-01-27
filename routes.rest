@@ -1,6 +1,6 @@
 //LOCALHOST
 ### Get all users
-Get http://localhost:8080/users
+Get http://localhost:8080/students
 
 ### Get contact by id
 GET http://localhost:8080/users/65a63599947aff5a69b912dd
