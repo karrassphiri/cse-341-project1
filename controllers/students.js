@@ -14,21 +14,21 @@ const getAll = async (req, res) => {
 
 const getSingle = (req, res) => {
     //#swagger.tags=['Users']
- 
     const studentId = new ObjectId(req.params.id);
     mongodb
-      .getDb()
-      .db()
-      .collection('students')
-      .find({ _id: studentId })
-      .toArray((err, result) => {
-        if (err) {
-          res.status(400).json({ message: err });
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result[0]);
-      });
-  };
+        .getDb()
+        .collection('students')
+        .find({ _id: studentId })
+        .toArray((err, result) => {
+            if (err) {
+                res.status(400).json({ message: err });
+            } else {
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).json(result[0]);
+            }
+        });
+};
+
 
 const createStudent = async (req, res) => {
         //#swagger.tags=['Users']
