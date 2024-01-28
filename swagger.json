@@ -19,36 +19,7 @@
         }
       }
     },
-    "/jotham": {
-      "get": {
-        "description": "Endpoint for Jotham",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/jathniel": {
-      "get": {
-        "description": "Endpoint for Jathniel",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "API documentation endpoint",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
+  
     "/students/": {
       "get": {
         "description": "Get all students",
