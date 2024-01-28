@@ -18,15 +18,11 @@ app.use((req, res, next) => {
 
 app.use('/', require('./routes'));
 
-const usersRouter = require('./routes/users'); // added for Mongodb
-
 const studentRouter = require('./routes/students'); // added for the "student" collection
 const teacherRouter = require('./routes/teachers'); // added for the "teacher" collection
 
-app.use('/users', usersRouter); // added for Mongodb
 app.use('/students', studentRouter); // added for the "student" collection
 app.use('/teachers', teacherRouter); // added for the "teacher" collection
-
 
 mongodb.initDb((err) => {
     if (err) {

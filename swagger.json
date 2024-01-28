@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Users, Students, and Teachers API",
-    "description": "API for managing users, students, and teachers",
+    "title": "Students and Teachers API",
+    "description": "API for managing students and teachers",
     "version": "1.0.0"
   },
   "host": "project2-act3.onrender.com",
@@ -49,9 +49,9 @@
         }
       }
     },
-    "/users/": {
+    "/students/": {
       "get": {
-        "description": "Get all users",
+        "description": "Get all students",
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -63,7 +63,7 @@
         }
       },
       "post": {
-        "description": "Create a new user",
+        "description": "Create a new student",
         "parameters": [
           {
             "name": "body",
@@ -77,13 +77,19 @@
                 "lastName": {
                   "example": "any"
                 },
+                "DoB": {
+                  "example": "any"
+                },
+                "grade": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                },
+                "contactNumber": {
+                  "example": "any"
+                },
                 "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
                   "example": "any"
                 }
               }
@@ -93,99 +99,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "description": "Get a user by ID",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "Update a user by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete a user by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -195,7 +108,7 @@
     },
     "/students/{id}": {
       "get": {
-        "tags": ["Users"],
+        "tags": ["Students"],
         "description": "",
         "produces": ["application/json"],
         "parameters": [
@@ -269,7 +182,7 @@
         }
       },
       "delete": {
-        "tags": ["Users"],
+        "tags": ["Students"],
         "description": "",
         "parameters": [
           {
@@ -294,7 +207,7 @@
     },
     "/teachers/": {
       "get": {
-        "description": "",
+        "description": "Get all teachers",
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -306,7 +219,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new teacher",
         "parameters": [
           {
             "name": "body",
@@ -342,7 +255,7 @@
     },
     "/teachers/{id}": {
       "get": {
-        "tags": ["Users"],
+        "tags": ["Teachers"],
         "description": "",
         "produces": ["application/json"],
         "parameters": [
@@ -407,7 +320,7 @@
         }
       },
       "delete": {
-        "tags": ["Users"],
+        "tags": ["Teachers"],
         "description": "",
         "parameters": [
           {

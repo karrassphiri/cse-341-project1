@@ -1,20 +1,27 @@
-const express = require('express'); //added for frontend
-
+const express = require('express');
 const routes = require('express').Router();
-routes.use('/', require('./swagger'));
-
-const path = require('path'); //added for frontend
+const path = require('path');
 const lesson1Controller = require('../controllers/lesson1');
 
-//routes.get('/', lesson1Controller.florenceRoute);
+routes.use('/', require('./swagger'));
+
+// Default route
 routes.get('/', (req, res) => {
-    //#Swagger.tags=['Hello World']
     res.send('Hello World');
-})
-routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend'))); //added for frontend
+});
+
+// Serve frontend files
+routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
+
+// Additional routes for teachers and students
+const studentsRoutes = require('./students');
+const teachersRoutes = require('./teachers');
+
+routes.use('/students', studentsRoutes);
+routes.use('/teachers', teachersRoutes);
+
+// Jotham and Jathniel routes
 routes.get('/jotham', lesson1Controller.jothamRoute);
 routes.get('/jathniel', lesson1Controller.jathnielRoute);
-routes.use('/users', require('./users'));
-
 
 module.exports = routes;
