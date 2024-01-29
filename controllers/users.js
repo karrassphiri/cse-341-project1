@@ -16,20 +16,24 @@ const getAll = async (req, res) => {
 
 const getSingle = (req, res) => {
     //#swagger.tags=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid student id to find student');
+        return; 
+    }
     const userId = new ObjectId(req.params.id);
     mongodb
-      .getDb()
-      .db()
-      .collection('users')
-      .find({ _id: userId })
-      .toArray((err, result) => {
-        if (err) {
-          res.status(400).json({ message: err });
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result[0]);
-      });
-  };
+        .getDb()
+        .collection('users')
+        .find({ _id: userId })
+        .toArray((err, result) => {
+            if (err) {
+                res.status(400).json({ message: err });
+            } else {
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).json(result[0]);
+            }
+        });
+};
 
 //This is the create user function
 const createUser = async (req, res) => {
