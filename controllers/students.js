@@ -3,6 +3,7 @@ const mongodb = require('../data/database'); //This import calls the Mongodb dat
 const ObjectId = require('mongodb').ObjectId; // this is the primary key that Mongo assigns
 
 const getAll = async (req, res) => {
+    //#Swagger.tags=['users']
     try {
         const result = await mongodb.getDb().collection('students').find().toArray();
         res.setHeader('Content-Type', 'application/json');
