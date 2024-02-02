@@ -5,7 +5,7 @@ const app = express();
 
 const port = process.env.PORT || 8080;
 
-app.use(bodyParser.json());   // This will make create user function to work
+app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -18,11 +18,15 @@ app.use((req, res, next) => {
 
 app.use('/', require('./routes'));
 
-const studentRouter = require('./routes/students'); // added for the "student" collection
-const teacherRouter = require('./routes/teachers'); // added for the "teacher" collection
+const studentRouter = require('./routes/students');
+const teacherRouter = require('./routes/teachers');
 
-app.use('/students', studentRouter); // added for the "student" collection
-app.use('/teachers', teacherRouter); // added for the "teacher" collection
+app.use('/students', studentRouter);
+app.use('/teachers', teacherRouter);
+
+process.on('uncaughtException', (err, origin) => {
+    console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
 
 mongodb.initDb((err) => {
     if (err) {

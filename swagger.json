@@ -19,7 +19,6 @@
         }
       }
     },
-  
     "/students/": {
       "get": {
         "description": "Get all students",
