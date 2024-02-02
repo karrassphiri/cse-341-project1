@@ -11,10 +11,6 @@ routes.get('/', (req, res) => {
 // Serve frontend files
 routes.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
 
-// Removed routes related to 'jotham' and 'jathniel'
-// routes.get('/jotham', lesson1Controller.jothamRoute);
-// routes.get('/jathniel', lesson1Controller.jathnielRoute);
-
 routes.use('/teachers', require('./teachers'));
 routes.use('/students', require('./students'));
 
