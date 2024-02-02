@@ -1,6 +1,26 @@
-const { response } = require('express');
-const mongodb = require('../data/database'); //This import calls the Mongodb database
-const ObjectId = require('mongodb').ObjectId; // this is the primary key that Mongo assigns
+const mongodb = require('../data/database');
+const ObjectId = require('mongodb').ObjectId;
+const validator = require('../helpers/validate');
+
+const saveTeacher = async (req, res, next) => {
+    const validationRule = {
+        firstName: 'required|string',
+        lastName: 'required|string',
+        contactNumber: 'required|string',
+        gender: 'required|string'
+    };
+
+    try {
+        await validator(req.body, validationRule, {});
+        next();
+    } catch (err) {
+        res.status(412).json({
+            success: false,
+            message: 'Validation failed',
+            data: err
+        });
+    }
+};
 
 const getAll = async (req, res) => {
     try {
@@ -8,89 +28,111 @@ const getAll = async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result);
     } catch (error) {
-        res.status(500).json('Error getting students: ' + error.message);
+        res.status(500).json({ message: 'Error getting teachers', error: error.message });
     }
 };
 
-const getSingle = (req, res) => {
-    //#swagger.tags=['Users']
-    const teacherId = new ObjectId(req.params.id);
-    mongodb
-      .getDb()
-      .db()
-      .collection('teachers')
-      .find({ _id: teacherId })
-      .toArray((err, result) => {
-        if (err) {
-          res.status(400).json({ message: err });
+const getSingle = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid teacher id to find a teacher.');
+        return;
+    }
+
+    try {
+        const teacherId = new ObjectId(req.params.id);
+        const result = await mongodb.getDb().collection('teachers').find({ _id: teacherId }).toArray();
+
+        if (result.length > 0) {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(result[0]);
+        } else {
+            res.status(404).json({ message: 'Teacher not found' });
         }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result[0]);
-      });
-  };
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting teacher', error: error.message });
+    }
+};
 
 const createTeacher = async (req, res) => {
-        //#swagger.tags=['Users']
     const teacher = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         contactNumber: req.body.contactNumber,
-        gender: req.body.gender  
+        gender: req.body.gender
     };
 
     try {
+        const validationRule = {
+            firstName: 'required|string',
+            lastName: 'required|string',
+            contactNumber: 'required|string',
+            gender: 'required|string'
+        };
+
+        await validator(teacher, validationRule, {});
+
         const response = await mongodb.getDb().collection('teachers').insertOne(teacher);
+
         if (response.acknowledged) {
             res.status(204).send();
         } else {
             res.status(500).json(response.error || 'Some error occurred while creating the teacher.');
         }
     } catch (error) {
-        res.status(500).json('Error creating teacher: ' + error.message);
+        res.status(500).json({ message: 'Error creating teacher', error: error.message });
     }
 };
 
-//This is the update teacher function
+
 const updateTeacher = async (req, res) => {
-    //#swagger.tagss=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid teacher id to update a teacher.');
+        return;
+    }
+
     const teacherId = new ObjectId(req.params.id);
     const updatedTeacher = {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             contactNumber: req.body.contactNumber,
-            gender: req.body.gender  
-         }
+            gender: req.body.gender
+        },
     };
 
     try {
+        // Include your validation logic here if needed
+
         const response = await mongodb.getDb().collection('teachers').updateOne({ _id: teacherId }, updatedTeacher);
 
         if (response.modifiedCount > 0) {
-            res.status(204).send();
+            res.status(200).send();
         } else {
-            res.status(404).json({ message: 'teacher not found' });
+            res.status(404).json({ message: 'Teacher not found' });
         }
     } catch (error) {
-        res.status(500).json('Error updating teacher: ' + error.message);
+        res.status(500).json({ message: 'Error updating teacher', error: error.message });
     }
 };
 
-
-//This is the delete student function
 const deleteTeacher = async (req, res) => {
-    //#swagger.tags=['Users']
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid teacher id to delete a teacher.');
+        return;
+    }
+
     const teacherId = new ObjectId(req.params.id);
+
     try {
         const response = await mongodb.getDb().collection('teachers').deleteOne({ _id: teacherId });
 
         if (response.deletedCount > 0) {
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'teacher not found' });
+            res.status(404).json({ message: 'Teacher not found' });
         }
     } catch (error) {
-        res.status(500).json('Error deleting teacher: ' + error.message);
+        res.status(500).json({ message: 'Error deleting teacher', error: error.message });
     }
 };
 
@@ -100,4 +142,5 @@ module.exports = {
     createTeacher,
     updateTeacher,
     deleteTeacher,
+    saveTeacher
 };
