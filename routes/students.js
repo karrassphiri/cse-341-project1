@@ -10,6 +10,8 @@ router.get('/:id', studentsController.getSingle);
 //router.post('/', validate.saveStudent, studentsController.createStudent);
 //router.put('/:id', validate.saveStudent, studentsController.updateStudent);
 //router.delete('/:id', studentsController.deleteStudent);
+
+//The routes below are using OATH to authorize the user
 router.post('/', isAuthenticated, studentsController.createStudent);
 router.put('/:id', isAuthenticated, studentsController.updateStudent);
 router.delete('/:id', isAuthenticated, studentsController.deleteStudent);
